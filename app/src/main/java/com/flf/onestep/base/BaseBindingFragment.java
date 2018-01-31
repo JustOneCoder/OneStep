@@ -1,5 +1,7 @@
-package com.flf.onestep;
+package com.flf.onestep.base;
 
+import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseBindingFragment<T extends ViewDataBinding> extends Fragment {
 
-    public View rootView;
+    protected T binding;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -20,14 +22,17 @@ public abstract class BaseFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(getLayoutId(), container, false);
-        return rootView;
+        binding = DataBindingUtil.inflate(inflater,getLayoutId(),container,false);
+        bindData(binding);
+        return binding.getRoot();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
+
+    protected abstract void bindData(T binding);
 
     public abstract int getLayoutId();
 }

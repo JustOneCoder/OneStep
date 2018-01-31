@@ -1,14 +1,13 @@
 package com.flf.onestep;
 
-import android.databinding.DataBindingUtil;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.alibaba.android.arouter.launcher.ARouter;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.flf.onestep.base.BaseBindingActivity;
+import com.flf.onestep.base.BaseBindingFragment;
 import com.flf.onestep.constant.RouterConstants;
 import com.flf.onestep.databinding.ActivityMainBinding;
 import com.flf.onestep.live.LiveFragment;
@@ -23,29 +22,24 @@ import com.flf.onestep.news.NewsFragment;
  */
 
 @Route(path = RouterConstants.MAIN)
-public class MainActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener {
+public class MainActivity extends BaseBindingActivity<ActivityMainBinding> implements BottomNavigationBar.OnTabSelectedListener {
 
     private static final String tab_title[] = {"新闻", "直播", "影院", "我的"};
-    ActivityMainBinding binding;
-    private BaseFragment mCurrentFragment;
-    private BaseFragment mNewsFragment;
-    private BaseFragment mLiveFragment;
-    private BaseFragment mMovieFragment;
-    private BaseFragment mMineFragment;
+    private BaseBindingFragment mCurrentFragment;
+    private BaseBindingFragment mNewsFragment;
+    private BaseBindingFragment mLiveFragment;
+    private BaseBindingFragment mMovieFragment;
+    private BaseBindingFragment mMineFragment;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ARouter.getInstance().inject(this);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+    public void bindData(ActivityMainBinding binding, Bundle savedInstanceState) {
         initView();
-        initData();
     }
 
-    //初始化数据
-    private void initData() {
-
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
 
@@ -96,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
      * params 将要加载的fragment
      */
 
-    private void switchFragment(BaseFragment toFragment) {
+    private void switchFragment(BaseBindingFragment toFragment) {
         FragmentManager fmManager = getSupportFragmentManager();
         if (mCurrentFragment != toFragment) {
             if (!toFragment.isAdded()) {      //判断是否曾经添加过,没有的话则添加一个Fragment
@@ -126,4 +120,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationB
     public void onTabReselected(int position) {
 
     }
+
+
 }
