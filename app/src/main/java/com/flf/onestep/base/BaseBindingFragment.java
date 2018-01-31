@@ -9,7 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
+/**
+ * 作者：flf
+ * 时间：2018/01/31/
+ * 说明：Fragment基类
+ */
 public abstract class BaseBindingFragment<T extends ViewDataBinding> extends Fragment {
 
     protected T binding;

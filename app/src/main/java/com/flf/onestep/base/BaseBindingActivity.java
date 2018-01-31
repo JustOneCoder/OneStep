@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.flf.onestep.R;
 
+/**
+ * 作者：flf
+ * 时间：2018/01/31/
+ * 说明：Avtivity基类
+ */
 public abstract class BaseBindingActivity<T extends ViewDataBinding> extends AppCompatActivity {
 
     protected T binding;
