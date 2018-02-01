@@ -2,21 +2,30 @@ package com.flf.onestep.news;
 
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.flf.onestep.R;
+import com.flf.onestep.base.BaseBindingAdapter;
 import com.flf.onestep.base.BaseBindingFragment;
 import com.flf.onestep.databinding.FragmentNewsBinding;
+
+import java.util.ArrayList;
 
 
 /**
  * 作者：flf
  * 时间：2018/01/31/
- * 说明：新闻,轮播图，条目新闻
+ * 说明：新闻,轮播图，条目新闻,
+ *      持有ViewModel
  */
 public class NewsFragment extends BaseBindingFragment<FragmentNewsBinding> {
-
+    ArrayList<String> list;
     @Override
     protected void bindData(FragmentNewsBinding binding) {
+        list = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            list.add(i+"");
+        }
         initView();
     }
 
@@ -26,6 +35,11 @@ public class NewsFragment extends BaseBindingFragment<FragmentNewsBinding> {
         newsBannerPagerAdapter.controlViewPagerSpeed();
         binding.indicatorNews.setViewPager(binding.viewpagerNews);
         new NewsBannerHandler().sendEmptyMessageDelayed(0,1000);
+        binding.rlvNews.setLayoutManager(new LinearLayoutManager(getContext()));
+        BaseBindingAdapter adapter = new BaseBindingAdapter(getContext());
+        adapter.addAll(list);
+        binding.rlvNews.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rlvNews.setAdapter(adapter);
 
     }
 

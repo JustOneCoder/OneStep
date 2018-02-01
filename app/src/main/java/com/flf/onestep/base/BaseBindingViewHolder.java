@@ -12,15 +12,15 @@ abstract class BaseBindingViewHolder<T> extends RecyclerView.ViewHolder {
 
     protected ViewDataBinding binding;
 
-    public BaseBindingViewHolder(View itemView) {
-        super(itemView);
+    public BaseBindingViewHolder(View view) {
+        super(view);
     }
 
     public BaseBindingViewHolder(ViewDataBinding binding) {
         super(binding.getRoot());
         this.binding = binding;
-
     }
 
-    public abstract void bindTo(BaseBindingViewHolder<T> holder, T list);
+    public abstract void bindTo(BaseBindingViewHolder<T> holder, T item);
+
 }
