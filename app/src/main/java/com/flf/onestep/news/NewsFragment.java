@@ -36,7 +36,7 @@ public class NewsFragment extends BaseBindingFragment<FragmentNewsBinding> {
         binding.indicatorNews.setViewPager(binding.viewpagerNews);
         new NewsBannerHandler().sendEmptyMessageDelayed(0,1000);
         binding.rlvNews.setLayoutManager(new LinearLayoutManager(getContext()));
-        BaseBindingAdapter adapter = new BaseBindingAdapter(getContext());
+        BaseBindingAdapter adapter = new NewsAdapter(getContext());
         adapter.addAll(list);
         binding.rlvNews.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rlvNews.setAdapter(adapter);

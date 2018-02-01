@@ -8,7 +8,7 @@ import android.view.View;
  * Created by fenglingfeng on 2018/1/31.
  */
 
-abstract class BaseBindingViewHolder<T> extends RecyclerView.ViewHolder {
+public abstract class BaseBindingViewHolder<T> extends RecyclerView.ViewHolder {
 
     protected ViewDataBinding binding;
 

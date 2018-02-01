@@ -20,7 +20,7 @@ import java.util.List;
  * 说明：支持下拉刷新和上滑加载更多(并且可以设置是否可以下拉刷新和上滑加载)
  */
 
-public class BaseBindingAdapter<T> extends RecyclerView.Adapter<BaseBindingViewHolder<String>> {
+public abstract class BaseBindingAdapter<T> extends RecyclerView.Adapter<BaseBindingViewHolder<T>> {
 
     protected List<T> mItems;
     protected Context mContext;
@@ -35,11 +35,12 @@ public class BaseBindingAdapter<T> extends RecyclerView.Adapter<BaseBindingViewH
     }
 
     @Override
-    public BaseBindingViewHolder<String> onCreateViewHolder(ViewGroup parent, int viewType) {
-        ViewDataBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),
-                viewType, parent, false);
-        return new ViewHolder(binding);
+    public BaseBindingViewHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
+
+        return createVH(parent,viewType);
     }
+
+    public abstract BaseBindingViewHolder<T> createVH(ViewGroup parent, int viewType);
 
     @Override
     public int getItemCount() {
@@ -51,22 +52,10 @@ public class BaseBindingAdapter<T> extends RecyclerView.Adapter<BaseBindingViewH
      holder.bindTo(holder,mItems.get(position));
     }
 
-    public class ViewHolder extends BaseBindingViewHolder<String> {
-
-        public ViewHolder(ViewDataBinding dataBinding) {
-            super(dataBinding);
-        }
-
-        @Override
-        public void bindTo(BaseBindingViewHolder<String> holder, String item) {
-            ItemNewsBinding dataBinding = (ItemNewsBinding) binding;
-            dataBinding.tvNews.setText(item);
-        }
-    }
 
     @Override
     public int getItemViewType(int position) {
-        return R.layout.item_news;
+        return super.getItemViewType(position);
     }
 
     public List<T> getData() {
