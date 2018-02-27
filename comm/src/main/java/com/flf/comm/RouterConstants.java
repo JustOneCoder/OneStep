@@ -1,4 +1,4 @@
-package com.flf.onestep.constant;
+package com.flf.comm;
 
 /**
  * 作者：flf
